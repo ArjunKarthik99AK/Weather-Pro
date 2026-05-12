@@ -7,7 +7,6 @@ import WeatherChart from '../components/WeatherChart.jsx';
 import FiveDayForecast from '../components/FiveDayForecast.jsx';
 import RadarCard from '../components/RadarCard.jsx';
 import SmartSuggestion from '../components/SmartSuggestion.jsx';
-import Favorites from '../components/Favorites.jsx';
 import SearchHistory from '../components/SearchHistory.jsx';
 import { useWeather } from '../context/WeatherContext.jsx';
 import Loader from '../components/Loader.jsx';
@@ -30,10 +29,9 @@ export default function Dashboard() {
           <WeatherChart />
           <FiveDayForecast />
         </div>
-        <div className="grid gap-6 xl:grid-cols-3">
+        <div className="grid gap-6 xl:grid-cols-2">
           <RadarCard />
           <SmartSuggestion />
-          <Favorites />
         </div>
         <SearchHistory />
       </div>
