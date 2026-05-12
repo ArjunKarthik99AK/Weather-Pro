@@ -18,7 +18,7 @@ export default function ClockGreeting() {
         <div>
           <p className="text-sm uppercase tracking-[0.4em] text-slate-400">{greeting}</p>
           <h1 className="text-5xl font-black tracking-tight text-white md:text-6xl">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h1>
-          <p className="mt-2 text-sm text-slate-300">Good morning, here is your weather intelligence for {city}</p>
+          <p className="mt-2 text-sm text-slate-300">{greeting}, here is your weather intelligence for {city}</p>
         </div>
         <div className="rounded-3xl border border-white/10 bg-white/5 px-5 py-4 text-right text-sm text-slate-300">
           <p className="text-slate-400">Current city</p>

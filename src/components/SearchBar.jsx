@@ -1,16 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
 import { FiSearch, FiMapPin } from 'react-icons/fi';
 import { useWeather } from '../context/WeatherContext.jsx';
+import useLocalStorage from '../hooks/useLocalStorage.js';
 
 export default function SearchBar() {
   const { fetchWeather, fetchByCoords, popularOptions, setCity } = useWeather();
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(false);
+  const [searchHistory, setSearchHistory] = useLocalStorage('searchHistory', []);
 
   const suggestions = useMemo(() => {
-    if (!query) return popularOptions;
-    return popularOptions.filter((item) => item.toLowerCase().includes(query.toLowerCase()));
-  }, [query, popularOptions]);
+    if (!query) return searchHistory.length > 0 ? searchHistory : popularOptions;
+    const allOptions = searchHistory.length > 0 ? searchHistory : popularOptions;
+    return allOptions.filter((item) => item.toLowerCase().includes(query.toLowerCase()));
+  }, [query, searchHistory, popularOptions]);
 
   useEffect(() => {
     const handleOutside = () => setActive(false);
@@ -23,6 +26,11 @@ export default function SearchBar() {
     if (!query.trim()) return;
     fetchWeather(query.trim());
     setCity(query.trim());
+    
+    // Add to search history (avoid duplicates, keep most recent at top)
+    const updatedHistory = [query.trim(), ...searchHistory.filter((item) => item !== query.trim())].slice(0, 10);
+    setSearchHistory(updatedHistory);
+    
     setQuery('');
   };
 
@@ -63,6 +71,11 @@ export default function SearchBar() {
               onClick={() => {
                 fetchWeather(item);
                 setCity(item);
+                
+                // Add to search history
+                const updatedHistory = [item, ...searchHistory.filter((h) => h !== item)].slice(0, 10);
+                setSearchHistory(updatedHistory);
+                
                 setQuery('');
                 setActive(false);
               }}

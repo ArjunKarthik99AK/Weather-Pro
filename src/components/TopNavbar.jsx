@@ -1,10 +1,12 @@
 import { FiSearch, FiBell, FiSun, FiMoon, FiSettings } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 import { useTheme } from '../context/ThemeContext.jsx';
 
 export default function TopNavbar() {
   const { theme } = useTheme();
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-10 bg-bg/90 border-b border-white/10 backdrop-blur-xl px-6 py-5 md:px-4">
@@ -26,7 +28,11 @@ export default function TopNavbar() {
           <button className="inline-flex h-12 w-12 items-center justify-center rounded-3xl border border-white/10 bg-white/5 text-slate-200 hover:bg-white/10">
             <FiBell />
           </button>
-          <button className="inline-flex h-12 w-12 items-center justify-center rounded-3xl border border-white/10 bg-white/5 text-slate-200 hover:bg-white/10">
+          <button
+            onClick={() => navigate('/settings')}
+            className="inline-flex h-12 w-12 items-center justify-center rounded-3xl border border-white/10 bg-white/5 text-slate-200 hover:bg-white/10"
+            aria-label="Open settings"
+          >
             <FiSettings />
           </button>
         </div>
