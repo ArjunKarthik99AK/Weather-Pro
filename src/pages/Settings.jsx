@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext.jsx';
 import { useWeather } from '../context/WeatherContext.jsx';
 import ThemeToggle from '../components/ThemeToggle.jsx';
@@ -6,8 +5,7 @@ import UnitToggle from '../components/UnitToggle.jsx';
 
 export default function Settings() {
   const { theme, toggleTheme } = useTheme();
-  const { unit, toggleUnit, clearHistory, clearFavorites } = useWeather();
-  const [animationEnabled, setAnimationEnabled] = useState(true);
+  const { unit, toggleUnit, clearHistory, clearFavorites, animationEnabled, toggleAnimation } = useWeather();
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
@@ -47,7 +45,7 @@ export default function Settings() {
                 <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Weather Animation</p>
                 <p className="mt-2 text-sm text-slate-300">Enable or disable visual weather effects.</p>
               </div>
-              <button onClick={() => setAnimationEnabled((prev) => !prev)} className="rounded-3xl bg-white/5 px-4 py-3 text-sm text-slate-200 hover:bg-white/10">{animationEnabled ? 'Disable' : 'Enable'}</button>
+              <button onClick={toggleAnimation} className="rounded-3xl bg-white/5 px-4 py-3 text-sm text-slate-200 hover:bg-white/10">{animationEnabled ? 'Disable' : 'Enable'}</button>
             </div>
             <p className="text-sm text-slate-400">This setting controls CSS weather animations across the dashboard.</p>
           </div>
@@ -55,15 +53,6 @@ export default function Settings() {
       </section>
 
       <aside className="space-y-6">
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-glow backdrop-blur-xl">
-          <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Developer API</p>
-          <div className="mt-4 rounded-3xl border border-white/10 bg-slate-950/70 p-5">
-            <p className="text-sm text-slate-300">vwp_live_8293znx0293kalsd0923j</p>
-            <button className="mt-4 inline-flex rounded-3xl bg-sky-500/15 px-4 py-2 text-sm text-sky-200 hover:bg-sky-500/25">Refresh Key</button>
-          </div>
-          <p className="mt-4 text-sm text-slate-400">Your key allows up to 50,000 calls per month.</p>
-        </section>
-
         <section className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-glow backdrop-blur-xl">
           <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Notifications</p>
           <ul className="mt-4 space-y-4 text-sm text-slate-300">

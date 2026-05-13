@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { useWeather } from '../context/WeatherContext.jsx';
 import { formatTemperature } from '../utils/weatherUtils.js';
 import UnitToggle from './UnitToggle.jsx';
-import WeatherAnimation from './WeatherAnimation.jsx';
 
 const containerVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -22,7 +21,7 @@ const itemVariants = {
 };
 
 export default function CurrentWeatherCard() {
-  const { weather, forecast, unit, addFavorite, favorites, city } = useWeather();
+  const { weather, forecast, unit, addFavorite, favorites, city, animationEnabled } = useWeather();
   const condition = weather?.weather?.[0]?.main || 'Clear';
   const isFavorite = favorites.includes(weather?.name);
 
@@ -33,7 +32,6 @@ export default function CurrentWeatherCard() {
       animate="visible"
       className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-glow backdrop-blur-xl"
     >
-      <WeatherAnimation condition={condition} />
       <div className="relative grid gap-6 lg:grid-cols-2">
         <motion.div variants={itemVariants} className="space-y-5">
           <div className="flex flex-wrap items-center justify-between gap-4">
