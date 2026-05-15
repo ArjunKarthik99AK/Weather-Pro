@@ -10,7 +10,6 @@ export function WeatherProvider({ children }) {
   const [unit, setUnit] = useLocalStorage('weatherpro-unit', 'metric');
   const [favorites, setFavorites] = useLocalStorage('weatherpro-favorites', []);
   const [history, setHistory] = useLocalStorage('weatherpro-history', []);
-  const [animationEnabled, setAnimationEnabled] = useLocalStorage('weatherpro-animation-enabled', true);
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -73,7 +72,6 @@ export function WeatherProvider({ children }) {
   const clearFavorites = () => setFavorites([]);
 
   const toggleUnit = () => setUnit((prev) => (prev === 'metric' ? 'imperial' : 'metric'));
-  const toggleAnimation = () => setAnimationEnabled((prev) => !prev);
 
   useEffect(() => {
     if (!weather) return;
@@ -106,9 +104,7 @@ export function WeatherProvider({ children }) {
         clearFavorites,
         toggleUnit,
         popularOptions,
-        setCity,
-        animationEnabled,
-        toggleAnimation
+        setCity
       }}
     >
       {children}

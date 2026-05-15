@@ -21,7 +21,7 @@ const itemVariants = {
 };
 
 export default function CurrentWeatherCard() {
-  const { weather, forecast, unit, addFavorite, favorites, city, animationEnabled } = useWeather();
+  const { weather, forecast, unit, addFavorite, favorites, city } = useWeather();
   const condition = weather?.weather?.[0]?.main || 'Clear';
   const isFavorite = favorites.includes(weather?.name);
 
